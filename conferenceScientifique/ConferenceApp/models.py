@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ValidationError
 from UserApp.models import User
 from django.core.validators import MinLengthValidator, MaxLengthValidator, FileExtensionValidator
 
@@ -19,6 +20,12 @@ class Conference(models.Model):
     description = models.TextField(validators=[MaxLengthValidator(300, "Description cannot exceed 300 characters."), MinLengthValidator(20, "Description must be at least 20 characters long.")])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def clean(self):
+        if self.start_date and self.end_date:
+            raise ValidationError("End date must be after start date.")
+        if self.start_date < self.end_date:
+            raise ValidationError("Start date must be before end date.")
 
 class OrganizerCommittee(models.Model):
     conference = models.ForeignKey(Conference, on_delete=models.CASCADE)
