@@ -23,10 +23,12 @@ class Conference(models.Model):
 
     def clean(self):
         if self.start_date and self.end_date:
-            raise ValidationError("End date must be after start date.")
-        if self.start_date < self.end_date:
-            raise ValidationError("Start date must be before end date.")
-
+            if self.end_date > self.start_date:
+                raise ValidationError("End date must be after start date.")
+            
+    def __str__(self):
+        return self.name
+        
 class OrganizerCommittee(models.Model):
     conference = models.ForeignKey(Conference, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
