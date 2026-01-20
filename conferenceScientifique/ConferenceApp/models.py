@@ -22,8 +22,8 @@ class Conference(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def clean(self):
-        if self.start_date and self.end_date:
-            if self.end_date > self.start_date:
+        if self.end_date and self.start_date:
+            if self.end_date < self.start_date:
                 raise ValidationError("End date must be after start date.")
             
     def __str__(self):
