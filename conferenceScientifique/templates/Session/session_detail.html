@@ -1,0 +1,8 @@
+{{ session.title }}
+<p><strong>Day:</strong> {{ session.session_day }}</p>
+<p><strong>Start Time:</strong> {{ session.start_time }}</p>    
+<p><strong>End Time:</strong> {{ session.end_time }}</p>    
+<p><strong>Room:</strong> {{ session.room }}</p>
+<p><strong>Topic:</strong> {{ session.topic }}</p>
+<br>    
+<a href="{% url 'session_lv' %}">Back to Session List</a>

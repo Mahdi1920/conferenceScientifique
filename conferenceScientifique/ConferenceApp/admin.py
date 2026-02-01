@@ -1,12 +1,33 @@
 from django.contrib import admin
 from .models import *
+from django.utils import timezone
 
 # Register your models here.
 
+class ConferenceDateFilter(admin.SimpleListFilter):
+    title = 'Conference Date'
+    parameter_name = 'conference_date'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('past', 'Past Conferences'),
+            ('upcoming', 'Upcoming Conferences'),
+            ('ongoing', 'Ongoing Conferences'),
+        )
+
+    def queryset(self, request, queryset):
+        today = timezone.now()
+        if self.value() == 'past':
+            return queryset.filter(end_date__lt=today)
+        if self.value() == 'upcoming':
+            return queryset.filter(start_date__gte=today)
+        if self.value() == 'ongoing':
+            return queryset.filter(start_date__lte=today, end_date__gte=today)
+        return queryset
 class ConferenceAdmin(admin.ModelAdmin):
     list_display = ('name', 'location', 'start_date', 'end_date')
     search_fields = ('name', 'theme', 'location')
-    list_filter = ('theme', 'location')
+    list_filter = ('theme', 'location', ConferenceDateFilter)
     list_per_page = 1
 
 admin.site.register(Conference, ConferenceAdmin)

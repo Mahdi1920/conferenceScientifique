@@ -1,0 +1,25 @@
+<nav>
+    <button><a href="{% url 'user_home' %}">Home</a></button>
+    <button><a href="{% url 'user_about' %}">About</a></button>
+    <button><a href="{% url 'user_lv' %}">User List</a></button>
+</nav>
+<br>
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

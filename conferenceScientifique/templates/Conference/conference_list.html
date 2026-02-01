@@ -1,0 +1,29 @@
+<nav>
+    <button><a href="{% url 'conference_home' %}">Home</a></button> 
+    <button><a href="{% url 'conference_lv' %}">Conference List</a></button>
+</nav>
+<br>
+<table border="1" cellpadding="5" cellspacing="0" >
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Theme</th>
+            <th>Location</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for conference in conferences %}
+        <tr>
+            <td>{{ conference.name }}</td>
+            <td>{{ conference.theme }}</td>
+            <td>{{ conference.location }}</td>
+            <td>{{ conference.start_date }}</td>
+            <td>{{ conference.end_date }}</td>
+            <td><a href="{% url 'conference_detail_lv' conference.id %}">View Details</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,9 @@
+{{ conference.name }}
+<p>Theme: {{ conference.theme }}</p>
+<p>Location: {{ conference.location }}</p>
+<p>Dates: {{ conference.start_date }} to {{ conference.end_date }}</p>  
+<p>Description: {{ conference.description }}</p>
+<p>Organizers: {{ conference.organizers }}</p>
+<p>Contact Email: {{ conference.contact_email }}</p>
+<br>    
+<a href="{% url 'conference_lv' %}">Back to Conference List</a>
