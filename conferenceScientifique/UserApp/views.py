@@ -26,3 +26,4 @@ class UserDetailView(DetailView):
     model=User
     context_object_name='user'  
     template_name='User/user_detail.html'
+

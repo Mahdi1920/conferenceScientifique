@@ -1,0 +1,6 @@
+<form method="post">
+    {% csrf_token %}
+    <h1>Are you sure you want to delete the conference "{{ conference.name }}"?</h1>
+    <button type="submit"><a href="">Confirm Delete</a></button>
+    <button type="reset">Cancel</button>
+</form>

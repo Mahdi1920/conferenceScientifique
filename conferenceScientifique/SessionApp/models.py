@@ -1,4 +1,5 @@
 from django.db import models
+from ConferenceApp.models import Conference
 
 # Create your models here.
 class Session (models.Model):
@@ -9,3 +10,4 @@ class Session (models.Model):
     end_time = models.TimeField ()
     room = models.IntegerField()
     topic = models.CharField (max_length=200)
+    conference = models.ForeignKey(Conference, on_delete=models.CASCADE)

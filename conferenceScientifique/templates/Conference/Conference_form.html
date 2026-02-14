@@ -1,0 +1,6 @@
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Conference</button>
+    <button type="reset">Cancel</button>
+</form>

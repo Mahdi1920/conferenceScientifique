@@ -1,8 +1,13 @@
 from urllib import request
 from django.http import HttpResponse
 from django.shortcuts import render
+
+from SessionApp.models import Session
+from .forms import ConferenceForm
 from .models import Conference
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic.edit import DeleteView, UpdateView
 
 # Create your views here.
 def home(request):
@@ -28,3 +33,27 @@ class ConferenceDetailView(DetailView):
     model = Conference
     context_object_name = 'conference'
     template_name = 'Conference/conference_detail.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        conference = self.get_object()
+        context['sessions'] =Session.objects.filter(conference=conference)
+        return context
+
+
+class ConferenceDeleteView(DeleteView):
+    model = Conference
+    context_object_name = 'conference'
+    template_name = 'Conference/conference_delete.html'
+    success_url = reverse_lazy('conference_lv')
+
+class ConferenceCreateView(CreateView):
+    model = Conference
+    form_class = ConferenceForm
+    template_name = 'Conference/conference_form.html'
+    success_url = reverse_lazy('conference_lv')
+
+class ConferenceUpdateView(UpdateView):
+    model = Conference
+    form_class = ConferenceForm
+    template_name = 'Conference/conference_form.html'
+    success_url = reverse_lazy('conference_lv')

@@ -5,5 +5,18 @@
 <p>Description: {{ conference.description }}</p>
 <p>Organizers: {{ conference.organizers }}</p>
 <p>Contact Email: {{ conference.contact_email }}</p>
+<h2>Sessions:</h2>
+<ul>
+    {% for session in sessions %}
+    <li>
+        <strong>Topic:</strong> {{ session.topic }}<br>
+        <strong>Day:</strong> {{ session.session_day }}<br>
+        <strong>Time:</strong> {{ session.start_time }} - {{ session.end_time }}<br>
+        <strong>Room:</strong> {{ session.room }}
+    </li>
+    {% empty %}
+    <li>No sessions available for this conference.</li>
+    {% endfor %}
+</ul>
 <br>    
 <a href="{% url 'conference_lv' %}">Back to Conference List</a>
