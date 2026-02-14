@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('conference/', include('ConferenceApp.urls')),
     path('session/', include('SessionApp.urls')),
-    path('user/', include('UserApp.urls')),
+    path('auth/', include('UserApp.urls')),
 ]
